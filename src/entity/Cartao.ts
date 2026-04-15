@@ -5,7 +5,7 @@ import { Usuario } from "./Usuario";
 export class Cartao{
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @Column()
     numero: string;
@@ -17,11 +17,11 @@ export class Cartao{
     dataValidade: Date;
 
     @ManyToOne(() => Usuario, (usuario) => usuario.cartao)
-    usuario: Usuario;
+    usuario!: Usuario;
 
     constructor(numero?: string, cvv?: number, dataValidade?: Date){
-        this.numero = numero;
-        this.cvv = cvv;
-        this.dataValidade = dataValidade;
+        this.numero = numero ?? "";
+        this.cvv = cvv ?? 0;
+        this.dataValidade = dataValidade ?? new Date();
     }
 }

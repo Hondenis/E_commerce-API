@@ -17,11 +17,18 @@ export class CarrinhoComprasRepository{
     }
 
     async editarCarrinho(id: number, carrinhoAtualizado: Partial<CarrinhoCompras>): Promise<CarrinhoCompras | null>{
-        const carrinho = await this.repositorioCarrinhoCompras.findOne({where: {id}});
+        const carrinho = await this.repositorioCarrinhoCompras.findOne({
+            where: { id },
+            relations: ["produto"]
+        });
         if(!carrinho){
             throw new Error("Carrinho não encontrado.");
         }
-        Object.assign(carrinho, carrinhoAtualizado);
+        const { produto, ...dadosRestantes } = carrinhoAtualizado;
+        Object.assign(carrinho, dadosRestantes);
+        if (produto !== undefined) {
+            carrinho.produto = produto;
+        }
         return await this.repositorioCarrinhoCompras.save(carrinho);
     }
 

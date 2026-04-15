@@ -33,9 +33,9 @@ export class EnderecoController{
             const id = parseInt(req.params.id);
             const enderecoAtualizados = req.body;
             await this.enderecoService.editarEndereco(id, enderecoAtualizados);
-            return res.status(200).json({ message: `Endereço ${id} editado com suscesso.`, enderecoAtualizados});
+            return res.status(200).json({ message: `Endereço ${id} editado com sucesso.`, enderecoAtualizados});
         } catch (error) {
-            return res.status(400).json({ message: "Error ao editar endereço.", error: error.message});
+            return res.status(400).json({ message: "Erro ao editar endereço.", error: error.message});
         }
     }
 

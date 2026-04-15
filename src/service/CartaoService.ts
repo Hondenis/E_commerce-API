@@ -26,7 +26,6 @@ export class CartaoService{
 
     async listarCartao(): Promise<Cartao[]>{
         return await this.cartaoRepository.listarCartao();
-            relations: ["usuario"]
     }
 
     async editarCartao(id: number, cartaoAtualizado: Partial<Cartao>): Promise<Cartao | null> {

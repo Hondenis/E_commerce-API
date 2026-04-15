@@ -3,13 +3,12 @@ import express from 'express';
 import usuarioRouter from "./router/usuario";
 import produtoRouter from "./router/produto";
 import estoqueRouter from "./router/estoque";
-import enderecoRouter from "./router/endereco"
+import enderecoRouter from "./router/endereco";
 import cartaoRouter from "./router/cartao";
 import carrinhoRouter from "./router/carrinhocompras";
 import { AppDataSource } from './banco';
 
-
-const app = express()
+const app = express();
 app.use(express.json());
 
 app.get('/test', (req, res) => {
@@ -22,19 +21,17 @@ app.use('/estoque', estoqueRouter);
 app.use('/endereco', enderecoRouter);
 app.use('/cartao', cartaoRouter);
 app.use('/carrinho', carrinhoRouter);
-const porta = 3000;
 
-app.listen(porta, async() =>{
+const porta = parseInt(process.env.APP_PORT || "3000");
 
 AppDataSource.initialize()
     .then(() => {
-        console.log("Conexão com o banco de dados efetuada com sucesso.")
-       
-
-
+        console.log("Conexão com o banco de dados efetuada com sucesso.");
+        app.listen(porta, () => {
+            console.log(`Servidor web rodando na porta ${porta}`);
+        });
     })
-    .catch((error) => console.log("Erro ao inicializar o banco de dados:", error));
-
-    console.log("Servidor web rodando na porta 3000");
-
-});
+    .catch((error) => {
+        console.error("Erro ao inicializar o banco de dados:", error);
+        process.exit(1);
+    });

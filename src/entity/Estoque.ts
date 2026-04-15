@@ -5,16 +5,16 @@ import { Produto } from "./Produto";
 export class Estoque{
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @Column()
     quantidadeEmEstoque: number;
 
     @OneToMany(() => Produto, (produto) => produto.estoque)
-    produto: Produto[];
+    produto!: Produto[];
 
     constructor(quantidadeEmEstoque?: number){
-        this.quantidadeEmEstoque = quantidadeEmEstoque;
+        this.quantidadeEmEstoque = quantidadeEmEstoque ?? 0;
     }
 
     

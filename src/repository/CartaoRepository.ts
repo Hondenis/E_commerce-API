@@ -14,7 +14,7 @@ export class CartaoRepository{
     }
 
     async listarCartao(): Promise<Cartao[]>{
-        return await this.repositorioCartao.find();
+        return await this.repositorioCartao.find({ relations: ["usuario"] });
     }
 
     async editarCartao(id: number, cartaoAtualizado: Partial<Cartao>): Promise<Cartao | null>{

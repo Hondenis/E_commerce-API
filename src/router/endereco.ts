@@ -9,5 +9,5 @@ router.put('/:id', (req, res) => {enderecoController.editarEndereco(req, res)});
 router.delete('/:id', (req, res) => {enderecoController.excluirEndereco(req, res)});
 router.get('/listar', (req, res) => {enderecoController.listarEndereco(req, res)});
 router.get('/:id', (req, res) => {enderecoController.pesquisarEndereco(req, res)});
-""
+
 export default router;

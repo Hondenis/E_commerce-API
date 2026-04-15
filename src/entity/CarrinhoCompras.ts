@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable, ManyToOne, Collection } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne } from "typeorm";
 import { Usuario } from "./Usuario";
 import { Produto } from "./Produto";
 
@@ -6,30 +6,30 @@ import { Produto } from "./Produto";
 export class CarrinhoCompras{
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
-    @Column()
-    valorUnitario: string;
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
+    valorUnitario: number;
 
     @Column()
     quantidade: number;
 
-    @Column()
-    valorTotal: string;
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
+    valorTotal: number;
 
     @Column({default: "Ativo"})
-    status: string; // Controla o status do carrinho
+    status!: string;
 
     @ManyToOne(() => Usuario, (usuario) => usuario.compras)
-    usuario: Usuario;
+    usuario!: Usuario;
     
     @ManyToMany(() => Produto, (produto) => produto.carrinhoCompras)
     @JoinTable()
-    produto: Produto[];
+    produto!: Produto[];
 
-    constructor(valorUnitario?: string, quantidade?: number, valorTotal?: string){
-        this.valorUnitario = valorUnitario;
-        this.quantidade = quantidade;
-        this.valorTotal = valorTotal;
+    constructor(valorUnitario?: number, quantidade?: number, valorTotal?: number){
+        this.valorUnitario = valorUnitario ?? 0;
+        this.quantidade = quantidade ?? 0;
+        this.valorTotal = valorTotal ?? 0;
     }
 }

@@ -6,7 +6,7 @@ import { CarrinhoCompras } from "./CarrinhoCompras";
 export class Produto{
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @Column()
     nome: string;
@@ -20,21 +20,21 @@ export class Produto{
     @Column()
     tamanho: number;
 
-    @Column()
-    valorUnitario: string;
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
+    valorUnitario: number;
 
     @ManyToOne(() => Estoque, (estoque) => estoque.produto)
-    estoque: Estoque;
+    estoque!: Estoque;
 
     @ManyToMany(() => CarrinhoCompras, (carrinhoCompras) => carrinhoCompras.produto)
-    carrinhoCompras: CarrinhoCompras[];
+    carrinhoCompras!: CarrinhoCompras[];
 
-    constructor(nome?: string, marca?: string, modelo?: string, tamanho?: number, valorUnitario?: string){
-        this.nome = nome;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.tamanho = tamanho;
-        this.valorUnitario = valorUnitario;
+    constructor(nome?: string, marca?: string, modelo?: string, tamanho?: number, valorUnitario?: number){
+        this.nome = nome ?? "";
+        this.marca = marca ?? "";
+        this.modelo = modelo ?? "";
+        this.tamanho = tamanho ?? 0;
+        this.valorUnitario = valorUnitario ?? 0;
     }
 
 }

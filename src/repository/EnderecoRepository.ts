@@ -20,7 +20,7 @@ export class EnderecoRepository{
     async editarEndereco(id: number, enderecoAtualizado: Partial<Endereco>): Promise<Endereco | null>{
         const endereco = await this.repositorioEndereco.findOne({ where: {id}});
         if(!endereco){
-            throw new Error("Produto não encontrado.")
+            throw new Error("Endereço não encontrado.")
         }
         Object.assign(endereco, enderecoAtualizado);
         return await this.repositorioEndereco.save(endereco);
@@ -29,7 +29,7 @@ export class EnderecoRepository{
     async excluirEndereco(id: number): Promise<void>{
         const endereco = await this.repositorioEndereco.findOne({ where: {id}})
         if(!endereco){
-            throw new Error("Produto não encontrado.");
+            throw new Error("Endereço não encontrado.");
         }
         await this.repositorioEndereco.remove(endereco);
     }

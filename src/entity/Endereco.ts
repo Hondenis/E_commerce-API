@@ -5,7 +5,7 @@ import { Usuario } from "./Usuario";
 export class Endereco{
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @Column()
     nomeRua: string;
@@ -26,14 +26,14 @@ export class Endereco{
     cep: string;
 
     @ManyToOne(() => Usuario, (usuario) => usuario.endereco)
-    usuario: Usuario;
+    usuario!: Usuario;
 
     constructor(nomeRua?: string, numeroCasa?: number, bairro?: string, cidade?: string, estado?: string, cep?: string){
-        this.nomeRua = nomeRua;
-        this.numeroCasa = numeroCasa;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.estado = estado;
-        this.cep = cep;
+        this.nomeRua = nomeRua ?? "";
+        this.numeroCasa = numeroCasa ?? 0;
+        this.bairro = bairro ?? "";
+        this.cidade = cidade ?? "";
+        this.estado = estado ?? "";
+        this.cep = cep ?? "";
     }
 }

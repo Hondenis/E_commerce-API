@@ -21,20 +21,13 @@ export class CarrinhoComprasService {
             carrinhoAtivo.status = "ativo";
             carrinhoAtivo.valorUnitario = produto.valorUnitario;
             carrinhoAtivo.quantidade = 1;
-            carrinhoAtivo.valorTotal = produto.valorUnitario; 
+            carrinhoAtivo.valorTotal = produto.valorUnitario;
             return await this.carrinhoRepository.criarCarrinho(carrinhoAtivo);
         }
 
-        
-        if (carrinhoAtivo.status === "finalizado") {
-            throw new Error("Este carrinho já foi finalizado. Crie um novo carrinho.");
-        }
-        
         carrinhoAtivo.produto.push(produto);
         carrinhoAtivo.quantidade += 1;
-        carrinhoAtivo.valorTotal = (
-            parseFloat(carrinhoAtivo.valorTotal) + parseFloat(produto.valorUnitario)
-        ).toString();  
+        carrinhoAtivo.valorTotal = Number(carrinhoAtivo.valorTotal) + Number(produto.valorUnitario);
         return await this.carrinhoRepository.criarCarrinho(carrinhoAtivo);
     }
 

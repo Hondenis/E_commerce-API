@@ -18,10 +18,10 @@ export class EstoqueService{
         if (!produto) {
             throw new Error("Produto não encontrado")
         }
-        
-        
 
-        return await this.estoqueRepository.criarEstoque(estoque);
+        const novoEstoque = await this.estoqueRepository.criarEstoque(estoque);
+        await this.produtoRepository.editarProduto(produto.id, { estoque: novoEstoque });
+        return novoEstoque;
     }
 
     async listarEstoque(): Promise<Estoque[]>{

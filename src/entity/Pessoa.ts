@@ -1,10 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
 export abstract class Pessoa{
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @Column()
     nome: string;
@@ -19,10 +18,10 @@ export abstract class Pessoa{
     dataNascimento: Date
 
     constructor(nome?: string, email?: string, cpf?: string, dataNascimento?: Date){
-        this.nome = nome;
-        this.email = email;
-        this.cpf = cpf;
-        this.dataNascimento = dataNascimento;
+        this.nome = nome ?? "";
+        this.email = email ?? "";
+        this.cpf = cpf ?? "";
+        this.dataNascimento = dataNascimento ?? new Date();
     }
 
 }

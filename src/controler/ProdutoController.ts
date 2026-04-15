@@ -36,7 +36,7 @@ export class ProdutoController {
             await this.produtoService.editarProduto(id, produtosAtualizados);
             return res.status(200).json({ message: `Produto com ID ${id} atualizado com sucesso.`, produtosAtualizados});
         } catch (error) {
-            return res.status(400).json({ message: "Erro ao atuzalizar produto.", error: error.message});
+            return res.status(400).json({ message: "Erro ao atualizar produto.", error: error.message});
         }
     }
 
